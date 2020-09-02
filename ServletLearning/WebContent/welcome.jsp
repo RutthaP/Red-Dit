@@ -18,6 +18,10 @@
 	%>
 	It Worked!!! <br><br>
 	
+	<form action="getUser" method="post">
+	<button type="submit">My profile</button>
+	</form>
+	
 	<form action="logout" method="post">
 	<button type="submit">Logout</button>
 	</form>

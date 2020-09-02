@@ -14,17 +14,19 @@
 			response.sendRedirect("index.html");
 			return;
 		}
-	
-		User user = (User)request.getAttribute("user");
-		out.println(user.getUsername());
-		out.println(user.getCreatedAt());
-		
-		if(user.getName() != null)
-			out.println(user.getName());
-		if(user.getAbout() != null)
-			out.println(user.getAbout());
 		
 	%>
+	
+	<div class="UserInfo">
+		<ul>
+			<li>Username: ${user.username}</li>
+			<li>Creation date: ${user.createdAt}</li>
+			<li>Name: ${user.name}</li>
+			<li>About me: ${user.about}</li>
+		</ul>
+	</div>
+	
+	
 	
 	<form action="logout" method="post">
 	<button type="submit">Logout</button>

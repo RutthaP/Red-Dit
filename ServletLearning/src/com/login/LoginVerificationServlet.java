@@ -25,7 +25,7 @@ public class LoginVerificationServlet extends HttpServlet {
 		if(userDao.verifyUser(uname, psw)) {
 			HttpSession session = request.getSession();
 			session.setAttribute("username", uname);
-			response.sendRedirect("welcome.jsp");
+			response.sendRedirect("index.html");
 		}else {
 			
 			response.sendRedirect("index.html");

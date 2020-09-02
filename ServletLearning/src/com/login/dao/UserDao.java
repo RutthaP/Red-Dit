@@ -12,7 +12,7 @@ public class UserDao {
 		this.dbUsername = dbUsername;
 		this.dbPassword = dbPassword;
 		db = 
-			new DBConnection("jdbc:postgresql://localhost:5432/fjesbok", "postgres", "themaskguy999");
+			new DBConnection("jdbc:postgresql://localhost:5432/fjesbok", "postgres", "pass");
 	}
 	
 	
