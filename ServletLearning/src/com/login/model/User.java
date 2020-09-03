@@ -1,12 +1,15 @@
 package com.login.model;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 public class User {
 	int id;
 	String username;
 	Timestamp createdAt;
 	String name, about;
+	
+	ArrayList<Post> posts;
 	
 	public String getUsername() {
 		return username;

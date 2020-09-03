@@ -62,6 +62,37 @@ public class UserDao {
 	}
 	
 	
+	public User getUser(int id) {
+		String query = "select * from users where id=" +id;
+		
+		try {
+			db.establishConnection();
+			db.statement = db.connection.createStatement();
+			db.resultSet = db.statement.executeQuery(query);
+			
+			if(db.resultSet.isBeforeFirst() == false) {
+				System.out.println("User not found  ");
+				return null;
+			}
+			db.resultSet.next();
+			User result = new User();
+			result.setId(db.resultSet.getInt("id"));
+			result.setUsername(db.resultSet.getString("username"));
+			result.setName(db.resultSet.getString("name"));
+			result.setAbout(db.resultSet.getString("about"));
+			result.setCreatedAt(db.resultSet.getTimestamp("created_at"));
+			
+			return result;
+		} catch (SQLException e) {
+			System.out.println("Error getting user   ");
+			e.printStackTrace();
+			return null;
+		}
+		finally {
+			db.closeConnection();
+		}
+	}
+	
 	public User getUser(String uname) {
 		String query = "select * from users where username=?";
 		
@@ -94,4 +125,5 @@ public class UserDao {
 		}
 
 	}
+	
 }
