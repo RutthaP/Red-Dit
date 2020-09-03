@@ -9,8 +9,7 @@
 <body>
 	<%
 		if(session.getAttribute("username") != null){
-			out.println("You\'re already logged in");
-			response.sendRedirect("index.html");
+			response.sendRedirect("home");
 			return;
 		}
 	%>
