@@ -24,6 +24,9 @@ public class GetUserServlet extends HttpServlet {
 	User user = null;
 	List<Post> userPosts = null;
 	
+	/*
+	 * Get session user
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
@@ -51,16 +54,23 @@ public class GetUserServlet extends HttpServlet {
 	}
 	
 	
+	
+	/*
+	 * Get different user
+	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
 		userDao = new UserDao("test", "test");
 		postDao = new PostDao();
 		
-		int userID = Integer.parseInt(request.getParameter("checkUser"));
+		if(request.getParameter("checkUser") == null) {
+			response.sendRedirect("home");
+			return;
+		}
+		String username = request.getParameter("checkUser").toString();
 		
-		user = userDao.getUser(userID);
-		userPosts = postDao.getUserPosts(userID);
+		user = userDao.getUser(username);
+		userPosts = postDao.getUserPosts(user.getId());
 		
 		request.setAttribute("user", user);
 		request.setAttribute("userPosts", userPosts);

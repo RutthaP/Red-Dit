@@ -33,10 +33,11 @@ public class CreatePostServlet extends HttpServlet {
 			return;
 		}
 		
-		User user = userDao.getUser(session.getAttribute("username").toString());
+		String username = session.getAttribute("username").toString();
+		User user = userDao.getUser(username);
 		int userID = user.getId();
 		
-		postDao.addPost(userID, heading, content);
+		postDao.addPost(userID, username, heading, content);
 		response.sendRedirect("home");
 	}
 }
