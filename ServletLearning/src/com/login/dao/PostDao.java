@@ -13,16 +13,17 @@ public class PostDao {
 		db = new DBConnection("jdbc:postgresql://localhost:5432/fjesbok", "postgres", "pass");
 	}
 	
-	public boolean addPost(int userID, String heading, String content) {
-		String query = "insert into posts(user_id, heading, content, date)"
-				+ " values(?, ?, ?, now())";
+	public boolean addPost(int userID, String username, String heading, String content) {
+		String query = "insert into posts(user_id, username, heading, content, date)"
+				+ " values(?, ?, ?, ?,now())";
 		
 		try {
 			db.establishConnection();
 			db.preparedStatement = db.connection.prepareStatement(query);
 			db.preparedStatement.setInt(1, userID);
-			db.preparedStatement.setString(2, heading);
-			db.preparedStatement.setString(3, content);
+			db.preparedStatement.setString(2, username);
+			db.preparedStatement.setString(3, heading);
+			db.preparedStatement.setString(4, content);
 			int insertedRows = db.preparedStatement.executeUpdate();
 			
 			if(insertedRows == 0) {
@@ -83,6 +84,7 @@ public class PostDao {
 				Post post = new Post();
 				post.setId(db.resultSet.getInt("id"));
 				post.setUserID(db.resultSet.getInt("user_id"));
+				post.setUsername(db.resultSet.getString("username"));
 				post.setHeading(db.resultSet.getString("heading"));
 				post.setDate(db.resultSet.getTimestamp("date"));
 				if(db.resultSet.getString("content") != null) {
@@ -120,6 +122,7 @@ public class PostDao {
 				Post post = new Post();
 				post.setId(db.resultSet.getInt("id"));
 				post.setUserID(userID);
+				post.setUsername(db.resultSet.getString("username"));
 				post.setHeading(db.resultSet.getString("heading"));
 				post.setDate(db.resultSet.getTimestamp("date"));
 				if(db.resultSet.getString("content") != null)

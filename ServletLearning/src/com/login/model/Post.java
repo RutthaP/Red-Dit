@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Post {
 	int id, userID;
-	String heading, content;
+	String heading, content, username;
 	Timestamp date, updateDate;
 	
 	public int getId() {
@@ -14,6 +14,12 @@ public class Post {
 		this.id = id;
 	}
 	
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
 	public int getUserID() {
 		return userID;
 	}
