@@ -15,7 +15,7 @@
 <body>
 	<header>
 		<div class="main-header">
-			<a href="#">
+			<a href="home">
 				<img src="Images/redditLogo.png" alt="Logo">
 			</a>
 
@@ -39,6 +39,9 @@
 					<form action="logout" method="post">
 						<input type="submit" value="Logout">
 					</form>
+					<form action="getUser" method="post">
+						<input type="submit" value="My profile">
+					</form>
 				</div>
 			</c:if>
 
@@ -47,43 +50,45 @@
 
 	<div class="clear-fix"></div>
 
-	<form action="getUser" method="post">
-		<input class="my-profile" type="submit" value="My profile">
-	</form>
-
-	<div class="clear-fix"></div>
-
 	<section>
-		<c:if test="${not empty username}">
-			<div class="create-post">
-				<form class="post-form" action="createPost" method="post">
-					<input type="text" name="heading" placeholder="Subject">
-					<textarea name="content" placeholder="Content..."></textarea>
-					<input class="button" type="submit" value="Submit">
-				</form>
-			</div>
-		</c:if>
-		
-		<c:if test="${empty username}">
-			<p>Login to create post</p>
-		</c:if>
+    <div class="post-heading">
+			<h1>Welcome to the red-dit frontpage</h1>
+		</div>
 
-		<c:if test="${not empty posts}">
-			<c:forEach items="${posts}" var="p">
-				<div class="post">
-					<form action="getUser" method="get">
-						By <input type="submit" value="${p.userID}" name="checkUser"> 
-					</form>
-					<h1>${p.heading}</h1>
-					
-			        <div class="content">
-			        	<p>${p.content}</p>
-			          	<p>Date: ${p.date}</p>
-			        </div>
-				</div>
-			</c:forEach>
+    <div class="create-post">
+  		<c:if test="${not empty username}">
+          <label>Create post</label>
+  				<form class="post-form" action="createPost" method="post">
+  					<input type="text" name="heading" placeholder="Subject">
+  					<textarea name="content" placeholder="Content..."></textarea>
+  					<input class="button" type="submit" value="Submit">
+  				</form>
+  		</c:if>
 
-		</c:if>
+      <c:if test="${empty username}">
+  			<p>Login to create post</p>
+  		</c:if>
+    </div>
+
+
+    <div class="all-posts">
+  		<c:if test="${not empty posts}">
+  			<c:forEach items="${posts}" var="p">
+  				<div class="post">
+  					<form class="author" action="getUser" method="get">
+  						<input type="submit" value="${p.username}" name="checkUser">
+  					</form>
+  					<h1>${p.heading}</h1>
+  			        <div class="content">
+  			        	<p>${p.content}</p>
+  			        </div>
+                <div class="content-date">
+                  <p>${p.date}</p>
+                </div>
+  				</div>
+  			</c:forEach>
+  		</c:if>
+    </div>
 
 		<div style="margin-top:100px;"></div>
 	</section>
