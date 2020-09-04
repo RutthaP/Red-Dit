@@ -43,6 +43,7 @@
 		</header>
 	
 		<div class="header-divider"></div>
+		
 		<div class="user-info">
 			<ul>
 				<li>Username: ${user.username}</li>
@@ -53,15 +54,18 @@
 		
 		<content>
 			<div class="all-posts">
-			
+				<h1>${user.username}s posts</h1>
 				<c:forEach items="${userPosts}" var="post">
 					<div class="post">
 						<h1>${post.heading}</h1>
 						<div class="content">
 							<p>${post.content}</p>
+						</div>
+						<div class="content-date">
 							<p>${post.date}</p>
 							<p>${post.updateDate}</p>
 						</div>
+						
 					</div>
 				</c:forEach>
 				

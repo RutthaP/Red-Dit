@@ -66,8 +66,10 @@ body{
 }
 
 .all-posts{
-    border-left: solid #fff;
-    margin-top: 50px;
+    margin-top: 10px;
+    width: 70%;
+    float: right;
+    box-sizing: border-box;
 }
 
 .post{
@@ -75,10 +77,7 @@ body{
   font-size: 20px;
   border-left: 50px solid #E27C5F;
   padding: 20px 50px 30px 50px;
-  margin: 0px auto 30px auto;
-  width: 70%;
-  box-sizing: border-box;
-  float: right;
+  margin: 0px auto 30px auto;  
 }
 
 .post h1{
@@ -99,3 +98,4 @@ body{
   font-style: oblique;
   margin-top: 20px;
 }
+

@@ -64,7 +64,7 @@
 		</div>
 
 		<div class="all-posts">
-      <label>My posts</label>
+      		<h1>My posts</h1>
 			<c:forEach items="${userPosts}" var="post">
 				<div class="post">
 					<h1>${post.heading}</h1>
