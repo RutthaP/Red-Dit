@@ -8,3 +8,5 @@
 - MVC pattern
 
 For learning servlets and JSP.
+### Gif of site:  
+![Gif of site](https://media.giphy.com/media/kyWYnDwjjTZ8lSenmP/giphy.gif)
