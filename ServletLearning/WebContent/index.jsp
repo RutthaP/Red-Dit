@@ -82,9 +82,21 @@
   			        <div class="content">
   			        	<p>${p.content}</p>
   			        </div>
-                <div class="content-date">
-                  <p>${p.date}</p>
-                </div>
+	                <div class="content-date">
+	                  <p>${p.date}</p>
+	                  <p>${p.updateDate}</p>
+	                </div>
+	                
+	                <c:if test="${not empty username}">
+	                	<c:if test="${username eq p.username}">
+	                		<form action="edit_post.jsp" method="post">
+			                	<input type="hidden" value="${p.heading}" name="postHeading">
+			                	<input type="hidden" value="${p.content}" name="postContent">
+			                	<input type="submit" value="edit">
+	                		</form>
+	                	</c:if>
+	                </c:if>
+	                
   				</div>
   			</c:forEach>
   		</c:if>
