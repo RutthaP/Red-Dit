@@ -41,15 +41,15 @@ public class PostDao {
 	}
 	
 	
-	public boolean updatePost(int userID, String heading, String content) {
+	public boolean updatePost(String username, String heading, String content) {
 		String query = "update posts "
-				+ "set heading = ?, content = ? where user_id = ?, update_date = now()";
+				+ "set heading = ?, content = ?, update_date = now() where username = ?";
 		try {
 			db.establishConnection();
 			db.preparedStatement = db.connection.prepareStatement(query);
 			db.preparedStatement.setString(1, heading);
 			db.preparedStatement.setString(2, content);
-			db.preparedStatement.setInt(3, userID);
+			db.preparedStatement.setString(3, username);
 			
 			int updatedRows = db.preparedStatement.executeUpdate();
 			if(updatedRows == 0) {
