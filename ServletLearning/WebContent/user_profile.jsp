@@ -54,7 +54,7 @@
 		
 		<content>
 			<div class="all-posts">
-				<h1>${user.username}s posts</h1>
+				<h1>${user.username}'s posts</h1>
 				<c:forEach items="${userPosts}" var="post">
 					<div class="post">
 						<h1>${post.heading}</h1>
