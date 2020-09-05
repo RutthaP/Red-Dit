@@ -3,6 +3,7 @@
 - Logged in user can create a post
 - One frontpage for all posts
 - Post history for each user
+- Allows a user to edit its own posts
 - Posts and users saved in local psql-database
 - Programmed with servlets and JSP
 - MVC pattern
