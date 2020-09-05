@@ -90,13 +90,13 @@
 	                <c:if test="${not empty username}">
 	                	<c:if test="${username eq p.username}">
 	                		<form action="edit_post.jsp" method="post">
+	                			<input type="hidden" value="${p.id}" name="postId">
 			                	<input type="hidden" value="${p.heading}" name="postHeading">
 			                	<input type="hidden" value="${p.content}" name="postContent">
 			                	<input type="submit" value="edit">
 	                		</form>
 	                	</c:if>
-	                </c:if>
-	                
+	                </c:if>   
   				</div>
   			</c:forEach>
   		</c:if>

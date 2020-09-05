@@ -18,11 +18,13 @@ public class EditPostServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String heading = request.getParameter("heading");
 		String content = request.getParameter("content");
+		int postId = Integer.parseInt(request.getParameter("postId"));
+		
 		HttpSession session = request.getSession();
 		String username = session.getAttribute("username").toString();
 		postDao = new PostDao();
 		
-		postDao.updatePost(username, heading, content);
+		postDao.updatePost(postId, username, heading, content);
 		
 		response.sendRedirect("home");
 	}

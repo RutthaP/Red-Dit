@@ -41,9 +41,10 @@ public class PostDao {
 	}
 	
 	
-	public boolean updatePost(String username, String heading, String content) {
+	public boolean updatePost(int postId, String username, String heading, String content) {
 		String query = "update posts "
-				+ "set heading = ?, content = ?, update_date = now() where username = ?";
+				+ "set heading = ?, content = ?, update_date = now() "
+				+ "where username = ? and id = " + postId;
 		try {
 			db.establishConnection();
 			db.preparedStatement = db.connection.prepareStatement(query);

@@ -19,6 +19,7 @@
 		
 		<div class="create-post">
 			<form class="post-form" action="editPost" method="post">
+				<input type="hidden" name="postId" value="${param['postId']}">
 				<input type="text" name="heading" value="${param['postHeading']}">
 				<textarea name="content" placeholder="Content...">${param["postContent"]}</textarea>
 				<input class="button" type="submit" value="Submit edit">
