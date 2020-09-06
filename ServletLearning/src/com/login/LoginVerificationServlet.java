@@ -14,9 +14,11 @@ import javax.xml.ws.Response;
 
 import com.login.dao.UserDao;
 
+/* Servlet for verifying login.
+ */
 @WebServlet("/login")
 public class LoginVerificationServlet extends HttpServlet {
-	UserDao userDao = new UserDao("test", "test");
+	UserDao userDao = new UserDao();
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String uname = request.getParameter("uname");

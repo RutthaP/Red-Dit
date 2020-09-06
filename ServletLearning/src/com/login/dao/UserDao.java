@@ -6,11 +6,8 @@ import com.login.model.User;
 
 public class UserDao {
 	DBConnection db;
-	String dbUsername, dbPassword;
 	
-	public UserDao(String dbUsername, String dbPassword){
-		this.dbUsername = dbUsername;
-		this.dbPassword = dbPassword;
+	public UserDao(){
 		db = 
 			new DBConnection("jdbc:postgresql://localhost:5432/fjesbok", "postgres", "pass");
 	}
@@ -124,6 +121,30 @@ public class UserDao {
 			db.closeConnection();
 		}
 
+	}
+	
+	
+	public boolean updateUser(String username, String about) {
+		String query = "update users set about = ? where username = ?";
+		try {
+			db.establishConnection();
+			db.preparedStatement = db.connection.prepareStatement(query);
+			db.preparedStatement.setString(1, about);
+			db.preparedStatement.setString(2, username);
+			
+			int updatedRows = db.preparedStatement.executeUpdate();
+			if(updatedRows == 0) {
+				System.out.println("0 rows updated");
+				return false;
+			}
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}	
+		finally {
+			db.closeConnection();
+		}
 	}
 	
 }

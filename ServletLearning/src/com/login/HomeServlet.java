@@ -13,6 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.login.dao.PostDao;
 import com.login.model.Post;
 
+/*
+ * Home servlet. Loads all the posts in the database and forwards 
+ * them to index.jsp.
+ */
 @WebServlet("/home")
 public class HomeServlet extends HttpServlet {
 	PostDao postDao = new PostDao();

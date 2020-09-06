@@ -37,7 +37,7 @@ public class GetUserServlet extends HttpServlet {
 			return;
 		}
 		
-		userDao = new UserDao("test", "test");
+		userDao = new UserDao();
 		postDao = new PostDao();
 		
 		// This session user
@@ -60,7 +60,7 @@ public class GetUserServlet extends HttpServlet {
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		userDao = new UserDao("test", "test");
+		userDao = new UserDao();
 		postDao = new PostDao();
 		
 		if(request.getParameter("checkUser") == null) {

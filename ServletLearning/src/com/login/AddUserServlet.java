@@ -15,27 +15,28 @@ import com.login.dao.UserDao;
 
 @WebServlet("/addUser")
 public class AddUserServlet extends HttpServlet {
-	UserDao userDao = new UserDao("test", "test");
+	UserDao userDao = new UserDao();
+	
+	/* Checks if a valid uname/pass was given with string.trim().
+	 * If a user was successfully added, redirect to home, else 
+	 * print error message.
+	 * 
+	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		String uname = request.getParameter("uname");
 		String pass = request.getParameter("pass");
 		PrintWriter out = response.getWriter();
 		
-		Pattern p = Pattern.compile("[\\w\\W0-9]");
-		Matcher m = p.matcher(uname);
-		if(m.find() == false) {
-			out.println("Error andding user " + uname);
+		if(uname.trim().length() <= 0) {
+			out.println("Provide valid username\nPlease try again...");
 			return;	
 		}
 		
-		p = Pattern.compile("[\\w\\W0-9]");
-		m = p.matcher(pass);
-		if(m.find() == false) {
-			out.println("Error andding user " + pass);
-			return;
+		if(pass.trim().length() <= 0) {
+			out.println("Provide valid password\nPlease try again...");
+			return;	
 		}
-		
 		
 		if(userDao.addUser(uname, pass) == true) {
 			HttpSession session = request.getSession();
@@ -43,7 +44,7 @@ public class AddUserServlet extends HttpServlet {
 			response.sendRedirect("home");
 		}
 		else {
-			out.println("Error andding user");
+			out.println("Error andding user\nPlease try again");
 		}
 	}
 }
