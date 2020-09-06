@@ -45,11 +45,34 @@
 		<div class="header-divider"></div>
 		
 		<div class="user-info">
-			<ul>
-				<li>Username: ${user.username}</li>
-				<li>Name: ${user.name}</li>
-				<li>About me: ${user.about}</li>
-			</ul>
+			<table>
+				<tr>
+					<th>Username:</th>
+					<td>${user.username}</td>
+				</tr>
+				<tr>
+					<th>Name:</th>
+					<td>${user.name}</td>
+				</tr>
+			</table>
+			
+			<h1>About me:</h1>
+			<c:if test="${empty username}">
+				<p>${user.about}</p>
+			</c:if>
+			
+			<c:if test="${not empty username}">
+				<c:if test="${username eq user.username}">
+					<form action="updateUser" method="post">
+						<textarea name="about">${user.about}</textarea>
+						<input type="submit" value="Confirm edit">
+					</form>
+				</c:if>
+				
+				<c:if test="${username ne user.username}">
+					<p>${user.about}</p>
+				</c:if>
+			</c:if>
 		</div>
 		
 		<content>
