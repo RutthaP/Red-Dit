@@ -29,6 +29,7 @@ public class GetUserServlet extends HttpServlet {
 	 */
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		
 		// Random user
@@ -43,7 +44,16 @@ public class GetUserServlet extends HttpServlet {
 		// This session user
 		String username = (String)session.getAttribute("username");
 		user = userDao.getUser(username);
+		if(user == null) {
+			out.println("Error getting user");
+			return;
+		}
+
 		userPosts = postDao.getUserPosts(user.getId());
+		if(userPosts == null) {
+			out.println("Error getting user posts");
+			return;
+		}
 		
 		
 		request.setAttribute("user", user);
@@ -60,6 +70,7 @@ public class GetUserServlet extends HttpServlet {
 	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		PrintWriter out = response.getWriter();
 		userDao = new UserDao();
 		postDao = new PostDao();
 		
@@ -70,7 +81,16 @@ public class GetUserServlet extends HttpServlet {
 		String username = request.getParameter("checkUser").toString();
 		
 		user = userDao.getUser(username);
+		if(user == null) {
+			out.println("Error getting user");
+			return;
+		}
+
 		userPosts = postDao.getUserPosts(user.getId());
+		if(userPosts == null) {
+			out.println("Error getting user posts");
+			return;
+		}
 		
 		request.setAttribute("user", user);
 		request.setAttribute("userPosts", userPosts);

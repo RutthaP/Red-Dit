@@ -1,6 +1,7 @@
 package com.login;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -22,10 +23,14 @@ public class HomeServlet extends HttpServlet {
 	PostDao postDao = new PostDao();
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		
+		PrintWriter out = response.getWriter();
 		List<Post> allPosts = postDao.getAllPosts();
-		request.setAttribute("posts", allPosts);
+		if(allPosts == null) {
+			out.println("Error getting posts");
+			return;
+		}
 		
+		request.setAttribute("posts", allPosts);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 	}

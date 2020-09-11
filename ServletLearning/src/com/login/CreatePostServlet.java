@@ -48,6 +48,11 @@ public class CreatePostServlet extends HttpServlet {
 		
 		String username = session.getAttribute("username").toString();
 		User user = userDao.getUser(username);
+		if(user == null) {
+			out.println("Error validating user");
+			return;
+		}
+		
 		int userID = user.getId();
 		
 		if(postDao.addPost(userID, username, heading, content) == true){
