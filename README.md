@@ -10,6 +10,4 @@
 
 For learning servlets and JSP.
 ### Gif of site:  
-![Gif of site](demo/gif_of_site_2.gif)
-
-<img src="demo/gif_of_site_2.gif" width="40" height="40" />
+![Gif of site](https://media.giphy.com/media/kyWYnDwjjTZ8lSenmP/giphy.gif)
