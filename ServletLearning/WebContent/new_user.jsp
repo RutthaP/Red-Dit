@@ -13,10 +13,13 @@
 			return;
 		}
 	%>
-	<form action="addUser" method="post">
-		<input type="text" placeholder="Enter username" name="uname">
-		<input type="password" placeholder="Enter password" name="pass">
-		<button type="submit">Create new user!</button>
+	<div class="msg"></div>
+	<form class="login" action="addUser" method="post">
+		<input id="uname" type="text" placeholder="Enter username" name="uname">
+		<input id="pass" type="password" placeholder="Enter password" name="pass">
+		<button class="button" type="submit">Create new user!</button>
 	</form>
+	
+	<script type="text/javascript" src="loginValidation.js" defer></script>
 </body>
 </html>

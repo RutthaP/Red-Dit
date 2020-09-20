@@ -10,39 +10,42 @@
 		<link rel="stylesheet" type="text/css" href="css/show_post.css">
 	</head>
 	<body>
-		<header>
-			<div class="main-header">
-				<a href="home">
-					<img src="Images/redditLogo.png" alt="Logo">
-				</a>
-				<!-- Login sidebar/welcome message -->
-				<div class="login-sidebar">
-					<c:if test="${empty username}">
+		<header>			
+		<div class="main-header">
+			<a href="home">
+				<img src="Images/redditLogo.png" alt="Logo">
+			</a>
+			<!-- Login sidebar/welcome message -->
+			<div class="login-sidebar">
+				<c:if test="${empty username}">
+				
+						<div class="msg"></div>
 						
-							<form class="login" action="login" method="post">
-								<input type="text" placeholder="Enter Username" name="uname">
-								<input type="password" placeholder="Enter Password" name="pass">
-								<input class="button" type="submit" value="Login">
-							</form>
-		
-							<form class="new-user" action="new_user.jsp" method="post">
-								<button type="submit">New user?</button>
-							</form>
-						
-					</c:if>
-		
-					<c:if test="${not empty username}">
-							<H1>Welcome ${username}!</H1>
-							<form action="logout" method="post">
-								<input type="submit" value="Logout">
-							</form>
-							<form action="getUser" method="post">
-								<input type="submit" value="My profile">
-							</form>
-					</c:if>
-				</div> <!-- Login sidebar end -->
-			</div> <!-- Main header end -->
-		</header>
+						<form class="login" action="login" method="post">
+							<input id="uname" type="text" placeholder="Enter Username" name="uname">
+							<input id="pass" type="password" placeholder="Enter Password" name="pass">
+							<input class="button" type="submit" value="Login">
+						</form>
+	
+						<form class="new-user" action="new_user.jsp" method="post">
+							<button type="submit">New user?</button>
+						</form>
+					
+				</c:if>
+	
+				<c:if test="${not empty username}">
+						<H1>Welcome ${username}!</H1>
+						<form action="logout" method="post">
+							<input type="submit" value="Logout">
+						</form>
+						<form action="getUser" method="get">
+							<input type="hidden" value="${username}" name="user">
+							<input type="submit" value="My profile">
+						</form>
+				</c:if>
+			</div> <!-- Login sidebar end -->
+		</div> <!-- Main header end -->
+	</header>
 		
 		<div class="clear-fix"></div>
 		
@@ -50,7 +53,7 @@
 			<!-- Post class -->  			
 			<div class="post">
 				<form class="author" action="getUser" method="get">
-					<input type="submit" value="${post.username}" name="checkUser">
+					<input type="submit" value="${post.username}" name="user">
 				</form>
 				<h1>${post.heading}</h1>
 		        <div class="content">
@@ -86,22 +89,25 @@
 			
 			<!-- Comments for the post -->  
             <div class="comment-container">
+            	<!-- Adding comments -->
             	<div class="add-comment">
             		<c:if test="${empty username}">
             			<h1>Login to comment</h1>
 	            	</c:if>
+	            	
 	            	<c:if test="${not empty username}">
-	            		<form action="addComment" method="post">
+	            		<form class="comment-form" action="addComment" method="post">
 	            			<h1>Add comment</h1>
 	            			<input type="hidden" value="${post.id}" name="postId">
 	            			<input type="hidden" value="${post.username}" name="postUname">
 		                	<input type="hidden" value="${post.heading}" name="postHeading">
 		                	<input type="hidden" value="${post.content}" name="postContent">
-	            			<textarea name="comment"></textarea>
+	            			<textarea id="comment" name="comment"></textarea>
 	            			<input type="submit" value="add comment">
 	            		</form>
 	            	</c:if>
-            	</div>
+	            	<div class="msg"></div>
+            	</div> <!-- Add comment end -->
             	
             	
             	<c:forEach items="${post.comments}" var="c">
@@ -112,6 +118,7 @@
             	</c:forEach>	
             </div> <!-- End comments -->
 		</section>
-		
+		<script type="text/javascript" src="loginValidation.js" defer></script>
+		<script type="text/javascript" src="commentValidation.js" defer></script>
 	</body>
 </html>

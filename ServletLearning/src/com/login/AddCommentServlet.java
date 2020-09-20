@@ -17,8 +17,7 @@ import com.login.model.User;
 
 /*
  * Servlet for adding comment, communicates with userDAO and commentDAO.
- * Gets the logged in user using userDAO, then checks for valid comment input.
- * Lastly adds the comment using commentDAO. 
+ * Gets the logged in user using userDAO, then adds the comment using commentDAO. 
  * When successful, it redirects to the post-page it was on using postID and postUname.
  */
 @WebServlet("/addComment")
@@ -40,16 +39,12 @@ public class AddCommentServlet extends HttpServlet {
 		User user = userDao.getUser((String)session.getAttribute("username"));
 		if(user == null) {
 			out.println("Error getting userid");
+			return;
 		}
 		
 		int userId = user.getId();
 		int postId = Integer.parseInt(request.getParameter("postId"));
 		String comment = request.getParameter("comment");
-		
-		if(comment.trim().length() == 0) {
-			out.println("Need comment input");
-			return;
-		}
 		
 		if(commentDao.addComment(userId, postId, comment) == false) {
 			out.println("Error adding comment...");

@@ -17,7 +17,8 @@ import com.login.dao.UserDao;
 public class AddUserServlet extends HttpServlet {
 	UserDao userDao = new UserDao();
 	
-	/* Checks if a valid uname/pass was given with string.trim().
+	/*
+	 * Servlet for adding user to database.
 	 * If a user was successfully added, redirect to home, else 
 	 * print error message.
 	 * 
@@ -27,16 +28,6 @@ public class AddUserServlet extends HttpServlet {
 		String uname = request.getParameter("uname");
 		String pass = request.getParameter("pass");
 		PrintWriter out = response.getWriter();
-		
-		if(uname.trim().length() <= 0) {
-			out.println("Provide valid username\nPlease try again...");
-			return;	
-		}
-		
-		if(pass.trim().length() <= 0) {
-			out.println("Provide valid password\nPlease try again...");
-			return;	
-		}
 		
 		if(userDao.addUser(uname, pass) == true) {
 			HttpSession session = request.getSession();

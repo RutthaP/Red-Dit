@@ -2,8 +2,6 @@ package com.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,11 +38,6 @@ public class CreatePostServlet extends HttpServlet {
 		
 		String heading = request.getParameter("heading");
 		String content = request.getParameter("content");
-		
-		if(heading.trim().length() <= 0) {
-			out.println("Need a valid heading\nPlease try again...");
-			return;
-		}
 		
 		String username = session.getAttribute("username").toString();
 		User user = userDao.getUser(username);
