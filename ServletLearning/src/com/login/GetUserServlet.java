@@ -22,63 +22,19 @@ public class GetUserServlet extends HttpServlet {
 	UserDao userDao = null;
 	PostDao postDao = null;
 	User user = null;
-	List<Post> userPosts = null;
+	List<Post> userPosts = null;	
 	
-	/*
-	 * Get session user
-	 */
-	@Override
-	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-		PrintWriter out = response.getWriter();
-		HttpSession session = request.getSession();
-		
-		// Random user
-		if(session.getAttribute("username") == null) {
-			response.sendRedirect("home");
-			return;
-		}
-		
-		userDao = new UserDao();
-		postDao = new PostDao();
-		
-		// This session user
-		String username = (String)session.getAttribute("username");
-		user = userDao.getUser(username);
-		if(user == null) {
-			out.println("Error getting user");
-			return;
-		}
-
-		userPosts = postDao.getUserPosts(user.getId());
-		if(userPosts == null) {
-			out.println("Error getting user posts");
-			return;
-		}
-		
-		
-		request.setAttribute("user", user);
-		request.setAttribute("userPosts", userPosts);
-		
-		RequestDispatcher requestDispatcher = request.getRequestDispatcher("my_profile.jsp");
-		requestDispatcher.forward(request, response);
-	}
-	
-	
-	
-	/*
-	 * Get different user
-	 */
 	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		PrintWriter out = response.getWriter();
 		userDao = new UserDao();
 		postDao = new PostDao();
 		
-		if(request.getParameter("checkUser") == null) {
+		if(request.getParameter("user") == null) {
 			response.sendRedirect("home");
 			return;
 		}
-		String username = request.getParameter("checkUser").toString();
+		String username = request.getParameter("user").toString();
 		
 		user = userDao.getUser(username);
 		if(user == null) {
