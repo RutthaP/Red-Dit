@@ -1,11 +1,13 @@
 package com.login.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Post {
 	int id, userID;
 	String heading, content, username;
 	Timestamp date, updateDate;
+	List<Comment> comments;
 	
 	public int getId() {
 		return id;
@@ -49,6 +51,12 @@ public class Post {
 	}
 	public void setUpdateDate(Timestamp updateDate) {
 		this.updateDate = updateDate;
+	}
+	public List<Comment> getComments() {
+		return comments;
+	}
+	public void setComments(List<Comment> comments) {
+		this.comments = comments;
 	}
 	
 	

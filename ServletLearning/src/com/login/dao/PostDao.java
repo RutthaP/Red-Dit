@@ -141,4 +141,37 @@ public class PostDao {
 			return null;
 		}
 	}
+	
+	
+	public Post getPostById(int postId) {
+		String query = "select * from posts where id=?";
+		try {
+			db.establishConnection();
+			db.preparedStatement = db.connection.prepareStatement(query);
+			db.preparedStatement.setInt(1, postId);
+			
+			db.resultSet = db.preparedStatement.executeQuery();
+			if(db.resultSet.isBeforeFirst() == false) {
+				return null;
+			}
+			
+			db.resultSet.next();
+			Post post = new Post();
+			post.setId(db.resultSet.getInt("id"));
+			post.setUserID(db.resultSet.getInt("user_id"));
+			post.setUsername(db.resultSet.getString("username"));
+			post.setHeading(db.resultSet.getString("heading"));
+			post.setDate(db.resultSet.getTimestamp("date"));
+			if(db.resultSet.getString("content") != null)
+				post.setContent(db.resultSet.getString("content"));
+			if(db.resultSet.getTimestamp("update_date") != null)
+				post.setUpdateDate(db.resultSet.getTimestamp("update_date"));
+			
+			return post;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}	
+	}
 }
